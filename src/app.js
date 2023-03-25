@@ -6,9 +6,11 @@ const SeasonManager = require('./SeasonManager');
 
 const world = new World();
 const dayManager = new DayManager();
-const seasonManager = new SeasonManager(dayManager);
+const seasonManager = new SeasonManager();
 world.addWorldObject(dayManager);
 world.addWorldObject(seasonManager);
+
+dayManager.subscribe(seasonManager.dayChanged.bind(seasonManager))
 
 const game = new Game((dt, ctx) => {
     world.update(dt);

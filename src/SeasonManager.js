@@ -1,25 +1,25 @@
 const SEASONS = [
     'Spring', 'Summer', 'Autumn', 'Winter'
 ]
-const DAYS_IN_SEASON = 90;
+const DAYS_IN_SEASON = 3;
 
 class SeasonManager {
-    constructor(dayManager) {
-        this.dayManager = dayManager;
+    constructor() {
         this.seasonIndex = 0;
-        this.lastDay = 0; // Using this to debounce day changes.
     }
 
     getSeason() {
         return SEASONS[this.seasonIndex % SEASONS.length];
     }
 
-    update(dt) {
-        const day = this.dayManager.getDay();
-        if (day != this.lastDay && day % DAYS_IN_SEASON == 0) {
+    dayChanged(day) {
+        if (day % DAYS_IN_SEASON == 0) {
             this.seasonIndex++;
         }
-        this.lastDay = day;
+    }
+
+    update(dt) {
+
     }
 
     render(ctx) {
